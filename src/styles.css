@@ -1,0 +1,149 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+ 	background-color: skyblue;
+	margin: 0;
+}
+
+h3 {
+	margin: 0;
+}
+
+input, select {
+    border: 1px solid lightgray;
+}
+
+select {
+	height: 20px;
+}
+
+button {
+	border: 1px black solid;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: 0;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 5px 15px;
+	text-align: center;
+}
+
+.mt-10px {
+	margin-top: 10px;
+}
+
+.mt-40px {
+	margin-top: 40px;
+}
+
+.mr-15px {
+	margin-right: 15px;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.red-letters {
+	color: red;
+}
+
+.green-letters {
+	color: green;
+}
+
+.golden-letters {
+	color: goldenrod;
+}
+
+.main {
+	background-color: white;
+	padding: 25px;
+	width: 80%;
+	margin: 50px auto 50px auto
+}
+
+.filters-containers {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.fullname-filter {
+	width: 210px;
+}
+
+.fullname-filter .suggestions-container {
+	width: 210px;
+}
+
+.email-filter {
+	width: 250px;
+}
+
+.email-filter .suggestions-container {
+	width: 250px;
+}
+
+.suggestions-container {
+	position: absolute;
+	max-height: 102px;
+	overflow-y: scroll;
+	border-right: 1px 1px solid lightgray;
+	border-left: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	background-color: white;
+}
+
+.suggestion-box {
+	padding: 1px 2px;
+	cursor: pointer;
+}
+
+.suggestion-box:hover {
+	background-color: ghostwhite;
+}
+
+.search-btn {
+	background-color: skyblue;
+	color: white;
+}
+
+.search-btn:hover {
+	background-color: darkblue;
+}
+
+.reset-btn {
+	background-color: crimson;
+	color: white;
+}
+
+.reset-btn:hover {
+	background-color: firebrick;
+}
+
+.table-container {
+	overflow-x: auto;
+}
+
+@media screen and (max-width: 940px) {
+	.main {
+		width: 100%;
+	}
+}
