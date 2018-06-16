@@ -53,10 +53,13 @@
 					<td> {{ row.email }} </td>
 					<td [ngClass]="{'green-letters': row.status == 'active', 'red-letters': row.status == 'inactive', 'golden-letters': row.status == 'premium'}"> {{ row.status }} </td>
 				</tr>
+				
 				<tr *ngIf="noData" class="red-letters">
-					<td colspan="4">No data</td>
+					<td colspan="4"> No data </td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
+
+<button *ngIf="displayScrollToTop" class="scroll-top-btn" (click)="scrollToTop()"> ⇧ </button>
