@@ -20,7 +20,7 @@ select {
 }
 
 button {
-	border: 1px black solid;
+	border: 0;
 	border-radius: 5px;
 	cursor: pointer;
 	outline: 0;
@@ -105,7 +105,7 @@ th, td {
 	position: absolute;
 	max-height: 102px;
 	overflow-y: scroll;
-	border-right: 1px 1px solid lightgray;
+	border-right: 1px solid lightgray;
 	border-left: 1px solid lightgray;
 	border-bottom: 1px solid lightgray;
 	background-color: white;
@@ -138,6 +138,22 @@ th, td {
 	background-color: firebrick;
 }
 
+.scroll-top-btn {
+	color: red;
+	background-color: transparent;
+	font-size: 2rem;
+	width: 43px;
+	border: 1px solid red;
+	position: fixed;
+	bottom: 20px;
+	right: 10px;
+}
+
+.scroll-top-btn:hover {
+	color: white;
+	background-color: red;
+}
+
 .table-container {
 	overflow-x: auto;
 }
@@ -145,5 +161,14 @@ th, td {
 @media screen and (max-width: 940px) {
 	.main {
 		width: 100%;
+	}
+	
+	.table-container {
+		margin-right: 25px;
+	}
+	
+	.scroll-top-btn {
+		font-size: 1.5rem;
+		width: 33.6px;
 	}
 }
