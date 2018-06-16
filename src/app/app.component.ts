@@ -34,11 +34,22 @@ export class AppComponent implements OnInit, OnDestroy {
 	tableData: Array<Data>;										//displayed data in table
 	noData: boolean;										//true if empty table
 	
+	displayScrollToTop: boolean;									//if true, scroll to top button is displayed
+	
 	constructor(private http: HttpClient) {}
 	
 	@HostListener('document:click') onClickAnywhere() {						//when user clicks
 		if (this.displaySuggestions == true) {							//if suggestions are displayed
 			this.displaySuggestions = false;						//hide suggestions
+		}
+	}
+	
+	@HostListener('window:scroll', ['$event']) onScroll(event:Event) {				//when user scrolls
+		if (document.documentElement.scrollTop >= 200) {					//if he has scrolled down 200 pixels or more
+			this.displayScrollToTop = true;							//display scroll to top button
+		}
+		else {
+			this.displayScrollToTop = false;						//hide scroll to top button
 		}
 	}
 	
@@ -51,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 	
 	getData() {
-		let url: string = 'assets/data.json';							//this is the url from where we are going to get data
+		let url: string = 'assets/data.json';							//this is the url from where site gets data
 		
 		this.sub = this.http.get<Data[]>(url).subscribe(data => {				//subscribe to server's response		
 			this.savedData = data;								//assign server's response to a variable
@@ -154,6 +165,10 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.displaySuggestions = false;
 		this.tableData = this.savedData;
 		this.noData = (this.tableData.length > 0) ? false : true;
+	}
+	
+	scrollToTop() {
+		document.body.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
 	}
 	
 	trackByFn(index, row: Data) {									//improves performance when table is updated
