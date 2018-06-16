@@ -12,11 +12,12 @@ h3 {
 }
 
 input, select {
-    border: 1px solid lightgray;
+	border: 1px solid lightgray;
 }
 
 select {
 	height: 20px;
+	background-color: white
 }
 
 button {
@@ -58,7 +59,7 @@ th, td {
 }
 
 .bold {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .red-letters {
