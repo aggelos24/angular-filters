@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 interface Data {
 	id: string;
@@ -14,7 +15,7 @@ interface Data {
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-	sub;												//variable for managing subscription
+	sub: Subscription;										//variable for managing subscription
 	
 	input = {											//form data
 		fullname: null,
@@ -197,6 +198,6 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy() {
-		this.sub.unsubscribe();									//delete subscription to server
+		this.sub.unsubscribe();									//end subscription
 	}
 }
