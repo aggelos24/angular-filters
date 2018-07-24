@@ -15,7 +15,7 @@ npm install -g @angular/cli
 ng new myproject
 ```
 * Copy downloaded files inside `src` and paste them in your `myproject/src` folder.
-* Open a new terminal window, cd to your `myproject` folder and type:
+* Using terminal, go to your `myproject` folder and type:
 ```
 ng serve --open
 ```
