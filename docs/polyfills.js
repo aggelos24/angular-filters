@@ -5438,8 +5438,9 @@ __webpack_require__.r(__webpack_exports__);
 // Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
 
 /**
- * Required to support Web Animations `@angular/platform-browser/animations`.
- * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
+ * Web Animations `@angular/platform-browser/animations`
+ * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
+ * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
  **/
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 /**
@@ -5472,7 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/aggelos/Angular/filters/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! C:\Users\tech-1\Documents\filters\src\polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

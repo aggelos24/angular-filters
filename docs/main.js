@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main\">\n\t\n\t<h3 class=\"text-center\"> Filters </h3>\n\t<div class=\"filters-containers\">\n\t\t<div class=\"fullname-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.fullname\" (ngModelChange)=\"generateSuggestions('fullname')\" placeholder=\"Select Full Name\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'fullname'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let fullname of splittedArray\" class=\"suggestion-box\" (click)=\"selectSuggestion(fullname.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of fullname.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.fullname.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"email-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.email\" (ngModelChange)=\"generateSuggestions('email')\" placeholder=\"Select Email\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'email'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let email of splittedArray\" class=\"suggestion-box\" (click)=\"selectSuggestion(email.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of email.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.email.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"mr-15px mt-10px\">\n\t\t\t<select [(ngModel)]=\"input.status\" (ngModelChange)=\"filter()\">\n\t\t\t\t<option [value]=\"'default'\"> Select Status </option>\n\t\t\t\t<option [value]=\"'active'\"> Active </option>\n\t\t\t\t<option [value]=\"'inactive'\"> Inactive </option>\n\t\t\t\t<option [value]=\"'premium'\"> Premium </option>\n\t\t\t</select>\n\t\t</div>\n\n\t\t<button class=\"search-btn mr-15px mt-10px\" (click)=\"search()\"> Search </button>\n\t\t\n\t\t<button class=\"reset-btn mt-10px\" (click)=\"resetFilters()\"> Reset Filters </button>\n\t</div>\n\n\t\n\t<h3 class=\"mt-40px text-center\"> Table </h3>\n\t<div class=\"mt-10px table-container\">\n\t\t<table>\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th> ID </th>\n\t\t\t\t\t<th> Full Name </th>\n\t\t\t\t\t<th> Email </th>\n\t\t\t\t\t<th> Status </th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let row of tableData; trackBy: trackByFn\">\n\t\t\t\t\t<td> {{ row.id }} </td>\n\t\t\t\t\t<td> {{ row.fullname }} </td>\n\t\t\t\t\t<td> {{ row.email }} </td>\n\t\t\t\t\t<td [ngClass]=\"{'green-letters': row.status == 'active', 'red-letters': row.status == 'inactive', 'golden-letters': row.status == 'premium'}\"> {{ row.status }} </td>\n\t\t\t\t</tr>\n\t\t\t\t\n\t\t\t\t<tr *ngIf=\"noData\" class=\"red-letters\">\n\t\t\t\t\t<td colspan=\"4\"> No data </td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n</div>\n\n<button *ngIf=\"displayScrollToTop\" class=\"scroll-top-btn\" (click)=\"scrollToTop()\"> ⇧ </button>\n"
+module.exports = "<div class=\"main\">\n\t\n\t<h2 class=\"text-center\"> Filters </h2>\n\t<div class=\"filters-containers\">\n\t\t<div class=\"fullname-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.fullname\" (ngModelChange)=\"generateSuggestions('fullname')\" placeholder=\"Select Full Name\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'fullname'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let fullname of splittedArray\" class=\"suggestion-box\" (click)=\"selectSuggestion(fullname.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of fullname.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.fullname.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"email-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.email\" (ngModelChange)=\"generateSuggestions('email')\" placeholder=\"Select Email\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'email'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let email of splittedArray\" class=\"suggestion-box\" (click)=\"selectSuggestion(email.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of email.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.email.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"mr-15px mt-10px\">\n\t\t\t<select [(ngModel)]=\"input.status\" (ngModelChange)=\"filter()\">\n\t\t\t\t<option [value]=\"'default'\"> Select Status </option>\n\t\t\t\t<option [value]=\"'active'\"> Active </option>\n\t\t\t\t<option [value]=\"'inactive'\"> Inactive </option>\n\t\t\t\t<option [value]=\"'premium'\"> Premium </option>\n\t\t\t</select>\n\t\t</div>\n\n\t\t<button class=\"search-btn mr-15px mt-10px\" (click)=\"search()\"> Search </button>\n\t\t\n\t\t<button class=\"reset-btn mt-10px\" (click)=\"resetFilters()\"> Reset Filters </button>\n\t</div>\n\n\t\n\t<h2 class=\"mt-40px text-center\"> Table </h2>\n\t<div class=\"mt-10px table-container\">\n\t\t<table>\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th> ID </th>\n\t\t\t\t\t<th> Full Name </th>\n\t\t\t\t\t<th> Email </th>\n\t\t\t\t\t<th> Status </th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let row of tableData; trackBy: trackByFn\">\n\t\t\t\t\t<td> {{ row.id }} </td>\n\t\t\t\t\t<td> {{ row.fullname }} </td>\n\t\t\t\t\t<td> {{ row.email }} </td>\n\t\t\t\t\t<td [ngClass]=\"{'green-letters': row.status == 'active', 'red-letters': row.status == 'inactive', 'golden-letters': row.status == 'premium'}\"> {{ row.status }} </td>\n\t\t\t\t</tr>\n\t\t\t\t\n\t\t\t\t<tr *ngIf=\"noData\" class=\"red-letters\">\n\t\t\t\t\t<td colspan=\"4\"> No data </td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n</div>\n\n<button *ngIf=\"displayScrollToTop\" class=\"scroll-top-btn\" (click)=\"scrollToTop()\"> ⇧ </button>\n"
 
 /***/ }),
 
@@ -216,7 +216,7 @@ var AppComponent = /** @class */ (function () {
         this.noData = true;
     };
     AppComponent.prototype.ngOnDestroy = function () {
-        this.sub.unsubscribe(); //delete subscription to server
+        this.sub.unsubscribe(); //end subscription
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])('document:click'),
@@ -305,13 +305,19 @@ var AppModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false
 };
+/*
+ * In development mode, to ignore zone related error stack frames such as
+ * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can
+ * import the following file, but please comment it out in production mode
+ * because it will have performance impact when throw error
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
 /***/ }),
@@ -349,7 +355,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/aggelos/Angular/filters/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\tech-1\Documents\filters\src\main.ts */"./src/main.ts");
 
 
 /***/ })
