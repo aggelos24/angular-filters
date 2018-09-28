@@ -28,7 +28,10 @@ export class AppComponent implements OnInit, OnDestroy {
 		email: false
 	};
 	
-	splittedArray;											//server records that contain input and splitted by input
+	splittedArray = {                                                                              //server records that contain input and splitted by input
+                fullname: [],
+                email: []
+	};
 	displaySuggestions: boolean;
 	
 	savedData: Array<Data>;										//contains all the data server has returned
@@ -39,10 +42,8 @@ export class AppComponent implements OnInit, OnDestroy {
 	
 	constructor(private http: HttpClient) {}
 	
-	@HostListener('document:click') onClickAnywhere() {						//when user clicks
-		if (this.displaySuggestions == true) {							//if suggestions are displayed
-			this.displaySuggestions = false;						//hide suggestions
-		}
+  	@HostListener('document:click') onClickAnywhere() {						//when user clicks
+	  	this.displaySuggestions = false;							//hide suggestions
 	}
 	
 	@HostListener('window:scroll', ['$event']) onScroll(event:Event) {				//when user scrolls
@@ -55,15 +56,14 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnInit() {
-		this.splittedArray = [];								//initialize variables
-		this.displaySuggestions = false;
+		this.displaySuggestions = false;							//initialize variables
 		this.selectedInput = null;
 		
 		this.getData();										//call function getData
 	}
 	
 	getData() {
-		let url: string = 'assets/data.json';							//this is the url from where site gets data
+		const url: string = 'assets/data.json';							//this is the url from where site gets data
 		
 		this.sub = this.http.get<Data[]>(url).subscribe(data => {				//subscribe to server's response		
 			this.savedData = data;								//assign server's response to a variable
@@ -75,64 +75,79 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 	
 	generateSuggestions(inputName: string) {
-		let tempArray, regex, existsInSuggestions;
-		this.splittedArray = [];								//initialize variables
-		this.displaySuggestions = false;
-		this.selectedInput = inputName;
-		this.validFilters[this.selectedInput] = false;
+                let tempArray, regex, existsInSuggestions;
+                this.splittedArray[inputName] = [];                                                     //initialize variables
+                this.displaySuggestions = false;
+                this.validFilters[this.selectedInput] = false;
 		
-		if (!this.input[this.selectedInput]) {							//if input is empty
-			this.filter();									//call function filter
-			return;										//stop function's execution
-		}
-		else if (this.input[this.selectedInput].length < 3) {					//if input's length is less than 3 characters
-			return;										//stop function's execution
-		}
+                if (!this.input[this.selectedInput]) {                                                  //if input is empty
+                        this.filter();                                                                  //call function filter
+                        return;                                                                         //stop function's execution
+                }
+                else if (this.input[this.selectedInput].length < 3) {                                   //if input's length is less than 3 characters
+                        return;                                                                         //stop function's execution
+                }
 		
-		existsInSuggestions = false;
-		for (let row of this.savedData) {
-			if (this.selectedInput == 'fullname') {						//for non unique properties
-				for (let element of this.splittedArray) {
-					if (element.value == row[this.selectedInput]) {			//check if there is a duplicate
-						existsInSuggestions = true;
+                existsInSuggestions = false;
+                for (let row of this.savedData) {
+                        if (this.selectedInput == 'fullname') {                                         //for non unique properties
+                                for (let element of this.splittedArray[inputName]) {
+                                        if (element.value == row[this.selectedInput]) {                 //check if there is a duplicate
+                                                existsInSuggestions = true;
+                                        }
+                                }
+                        }
+			
+                        if (existsInSuggestions == false) {                                             //if there is no duplicate
+                                regex = new RegExp('(' + this.input[this.selectedInput] + ')', 'i');
+                                                                                                        //this regular expression will search given server record for input
+                                tempArray = row[this.selectedInput].split(regex);                       //split string by regular expression and store the result into array
+			  	
+                                if (tempArray.length > 1) {                                             //if input exists in server record
+                                        if (tempArray[0] == '' && tempArray[2] == '') {
+                                                this.splittedArray[inputName] = [{ value: row[this.selectedInput], splitted: [row[this.selectedInput]] }];
+                                                this.validFilters[inputName] = true;
+                                        }
+                                        else {
+                                                this.splittedArray[inputName].push({ value: row[this.selectedInput], splitted: tempArray });
+                                                                                                        //push value and splitted array into array
 					}
 				}
 			}
-			
-			if (existsInSuggestions == false) {						//if there is no duplicate
-				regex = new RegExp('(' + this.input[this.selectedInput] + ')', 'i');
-													//this regular expression will search given server record for input
-				tempArray = row[this.selectedInput].split(regex);			//split string by regular expression and store the result into array
-
-				if (tempArray.length > 1) {						//if input exists in server record
-					this.splittedArray.push({ value: row[this.selectedInput], splitted: tempArray });
-													//push value and splitted array into array
-				}
-			}
 		}
 		
-		if (this.splittedArray.length > 0) {							//if there is at least one match
-			this.displaySuggestions = true;							//display suggestions
-		}
+                if (this.splittedArray[inputName].length > 0) {                                         //if there is at least one match
+                        this.displaySuggestions = true;                                                 //display suggestions
+                }
 	}
 	
 	selectSuggestion(value: string) {
-		this.input[this.selectedInput] = value;							//set input to selected suggestion
-		this.validFilters[this.selectedInput] = true;						//filter is valid
+                this.input[this.selectedInput] = value;                                                 //set input to selected suggestion
+                this.validFilters[this.selectedInput] = true;                                           //filter is valid
 		
-		this.filter();										//call function filter
+                this.filter();                                                                          //call function filter
 	}
 	
 	search() {
-		if (this.input.fullname) {								//if fullname input is not empty
-			this.validFilters.fullname = true;						//fullname filter is valid
-		}
-		if (this.input.email) {									//if email input is not empty
-			this.validFilters.email = true;							//email filter is valid
-		}
+                if (this.input.fullname) {								//if fullname input is not empty
+                        this.validFilters.fullname = true;						//fullname filter is valid
+                }
+                if (this.input.email) {									//if email input is not empty
+                        this.validFilters.email = true;                                                 //email filter is valid
+                }
 		
-		this.filter();										//call function filter
+                this.filter();                                                                          //call function filter
 	}
+	
+	inputClicked(inputName: string) {
+                this.selectedInput = inputName;
+                if (!(!this.input[this.selectedInput] || this.input[this.selectedInput].length < 3)) {
+                                                                                                        //if input's length is more than 2 characters
+                        setTimeout(() => {                                                              //this delay is necessary because this code must be executed after onClickAnywhere function
+                                this.displaySuggestions = true;						//show suggestions
+                        }, 10);
+                }
+        }
 	
 	filter() {
 		let tempData: Array<Data> = this.savedData;						//set server data to a variable
