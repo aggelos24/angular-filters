@@ -3,18 +3,18 @@
 	<h2 class="text-center"> Filters </h2>
 	<div class="filters-containers">
 		<div class="fullname-filter mr-15px mt-10px">
-			<input type="text" class="w-100" [(ngModel)]="input.fullname" (ngModelChange)="generateSuggestions('fullname')" placeholder="Select Full Name">
+			<input type="text" class="w-100" [(ngModel)]="input.fullname" (ngModelChange)="generateSuggestions('fullname')" (click)="inputClicked('fullname')" placeholder="Select Full Name">
 			<div *ngIf="displaySuggestions && selectedInput == 'fullname'" class="suggestions-container">
-				<div *ngFor="let fullname of splittedArray" class="suggestion-box" (click)="selectSuggestion(fullname.value)">
+				<div *ngFor="let fullname of splittedArray.fullname" class="suggestion-box" (click)="selectSuggestion(fullname.value)">
 					<ng-container *ngFor="let element of fullname.splitted"><span [ngClass]="{'bold': element.toLowerCase() == input.fullname.toLowerCase()}">{{ element }}</span></ng-container>
 				</div>
 			</div>
 		</div>
 
 		<div class="email-filter mr-15px mt-10px">
-			<input type="text" class="w-100" [(ngModel)]="input.email" (ngModelChange)="generateSuggestions('email')" placeholder="Select Email">
+			<input type="text" class="w-100" [(ngModel)]="input.email" (ngModelChange)="generateSuggestions('email')"(click)="inputClicked('email')"  placeholder="Select Email">
 			<div *ngIf="displaySuggestions && selectedInput == 'email'" class="suggestions-container">
-				<div *ngFor="let email of splittedArray" class="suggestion-box" (click)="selectSuggestion(email.value)">
+				<div *ngFor="let email of splittedArray.email" class="suggestion-box" (click)="selectSuggestion(email.value)">
 					<ng-container *ngFor="let element of email.splitted"><span [ngClass]="{'bold': element.toLowerCase() == input.email.toLowerCase()}">{{ element }}</span></ng-container>
 				</div>
 			</div>
