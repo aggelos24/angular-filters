@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main\">\n\t\n\t<h2 class=\"text-center\"> Filters </h2>\n\t<div class=\"filters-containers\">\n\t\t<div class=\"fullname-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.fullname\" (ngModelChange)=\"generateSuggestions('fullname')\" placeholder=\"Select Full Name\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'fullname'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let fullname of splittedArray\" class=\"suggestion-box\" (click)=\"selectSuggestion(fullname.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of fullname.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.fullname.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"email-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.email\" (ngModelChange)=\"generateSuggestions('email')\" placeholder=\"Select Email\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'email'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let email of splittedArray\" class=\"suggestion-box\" (click)=\"selectSuggestion(email.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of email.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.email.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"mr-15px mt-10px\">\n\t\t\t<select [(ngModel)]=\"input.status\" (ngModelChange)=\"filter()\">\n\t\t\t\t<option [value]=\"'default'\"> Select Status </option>\n\t\t\t\t<option [value]=\"'active'\"> Active </option>\n\t\t\t\t<option [value]=\"'inactive'\"> Inactive </option>\n\t\t\t\t<option [value]=\"'premium'\"> Premium </option>\n\t\t\t</select>\n\t\t</div>\n\n\t\t<button class=\"search-btn mr-15px mt-10px\" (click)=\"search()\"> Search </button>\n\t\t\n\t\t<button class=\"reset-btn mt-10px\" (click)=\"resetFilters()\"> Reset Filters </button>\n\t</div>\n\n\t\n\t<h2 class=\"mt-40px text-center\"> Table </h2>\n\t<div class=\"mt-10px table-container\">\n\t\t<table>\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th> ID </th>\n\t\t\t\t\t<th> Full Name </th>\n\t\t\t\t\t<th> Email </th>\n\t\t\t\t\t<th> Status </th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let row of tableData; trackBy: trackByFn\">\n\t\t\t\t\t<td> {{ row.id }} </td>\n\t\t\t\t\t<td> {{ row.fullname }} </td>\n\t\t\t\t\t<td> {{ row.email }} </td>\n\t\t\t\t\t<td [ngClass]=\"{'green-letters': row.status == 'active', 'red-letters': row.status == 'inactive', 'golden-letters': row.status == 'premium'}\"> {{ row.status }} </td>\n\t\t\t\t</tr>\n\t\t\t\t\n\t\t\t\t<tr *ngIf=\"noData\" class=\"red-letters\">\n\t\t\t\t\t<td colspan=\"4\"> No data </td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n</div>\n\n<button *ngIf=\"displayScrollToTop\" class=\"scroll-top-btn\" (click)=\"scrollToTop()\"> ⇧ </button>\n"
+module.exports = "<div class=\"main\">\n\t\n\t<h2 class=\"text-center\"> Filters </h2>\n\t<div class=\"filters-containers\">\n\t\t<div class=\"fullname-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.fullname\" (ngModelChange)=\"generateSuggestions('fullname')\" (click)=\"inputClicked('fullname')\" placeholder=\"Select Full Name\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'fullname'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let fullname of splittedArray.fullname\" class=\"suggestion-box\" (click)=\"selectSuggestion(fullname.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of fullname.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.fullname.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"email-filter mr-15px mt-10px\">\n\t\t\t<input type=\"text\" class=\"w-100\" [(ngModel)]=\"input.email\" (ngModelChange)=\"generateSuggestions('email')\"(click)=\"inputClicked('email')\"  placeholder=\"Select Email\">\n\t\t\t<div *ngIf=\"displaySuggestions && selectedInput == 'email'\" class=\"suggestions-container\">\n\t\t\t\t<div *ngFor=\"let email of splittedArray.email\" class=\"suggestion-box\" (click)=\"selectSuggestion(email.value)\">\n\t\t\t\t\t<ng-container *ngFor=\"let element of email.splitted\"><span [ngClass]=\"{'bold': element.toLowerCase() == input.email.toLowerCase()}\">{{ element }}</span></ng-container>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"mr-15px mt-10px\">\n\t\t\t<select [(ngModel)]=\"input.status\" (ngModelChange)=\"filter()\">\n\t\t\t\t<option [value]=\"'default'\"> Select Status </option>\n\t\t\t\t<option [value]=\"'active'\"> Active </option>\n\t\t\t\t<option [value]=\"'inactive'\"> Inactive </option>\n\t\t\t\t<option [value]=\"'premium'\"> Premium </option>\n\t\t\t</select>\n\t\t</div>\n\n\t\t<button class=\"search-btn mr-15px mt-10px\" (click)=\"search()\"> Search </button>\n\t\t\n\t\t<button class=\"reset-btn mt-10px\" (click)=\"resetFilters()\"> Reset Filters </button>\n\t</div>\n\n\t\n\t<h2 class=\"mt-40px text-center\"> Table </h2>\n\t<div class=\"mt-10px table-container\">\n\t\t<table>\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th> ID </th>\n\t\t\t\t\t<th> Full Name </th>\n\t\t\t\t\t<th> Email </th>\n\t\t\t\t\t<th> Status </th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let row of tableData; trackBy: trackByFn\">\n\t\t\t\t\t<td> {{ row.id }} </td>\n\t\t\t\t\t<td> {{ row.fullname }} </td>\n\t\t\t\t\t<td> {{ row.email }} </td>\n\t\t\t\t\t<td [ngClass]=\"{'green-letters': row.status == 'active', 'red-letters': row.status == 'inactive', 'golden-letters': row.status == 'premium'}\"> {{ row.status }} </td>\n\t\t\t\t</tr>\n\t\t\t\t\n\t\t\t\t<tr *ngIf=\"noData\" class=\"red-letters\">\n\t\t\t\t\t<td colspan=\"4\"> No data </td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n</div>\n\n<button *ngIf=\"displayScrollToTop\" class=\"scroll-top-btn\" (click)=\"scrollToTop()\"> ⇧ </button>\n"
 
 /***/ }),
 
@@ -80,11 +80,13 @@ var AppComponent = /** @class */ (function () {
             fullname: false,
             email: false
         };
+        this.splittedArray = {
+            fullname: [],
+            email: []
+        };
     }
     AppComponent.prototype.onClickAnywhere = function () {
-        if (this.displaySuggestions == true) {
-            this.displaySuggestions = false; //hide suggestions
-        }
+        this.displaySuggestions = false; //hide suggestions
     };
     AppComponent.prototype.onScroll = function (event) {
         if (document.documentElement.scrollTop >= 200) {
@@ -95,8 +97,7 @@ var AppComponent = /** @class */ (function () {
         }
     };
     AppComponent.prototype.ngOnInit = function () {
-        this.splittedArray = []; //initialize variables
-        this.displaySuggestions = false;
+        this.displaySuggestions = false; //initialize variables
         this.selectedInput = null;
         this.getData(); //call function getData
     };
@@ -113,9 +114,8 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.generateSuggestions = function (inputName) {
         var tempArray, regex, existsInSuggestions;
-        this.splittedArray = []; //initialize variables
+        this.splittedArray[inputName] = []; //initialize variables
         this.displaySuggestions = false;
-        this.selectedInput = inputName;
         this.validFilters[this.selectedInput] = false;
         if (!this.input[this.selectedInput]) {
             this.filter(); //call function filter
@@ -128,7 +128,7 @@ var AppComponent = /** @class */ (function () {
         for (var _i = 0, _a = this.savedData; _i < _a.length; _i++) {
             var row = _a[_i];
             if (this.selectedInput == 'fullname') {
-                for (var _b = 0, _c = this.splittedArray; _b < _c.length; _b++) {
+                for (var _b = 0, _c = this.splittedArray[inputName]; _b < _c.length; _b++) {
                     var element = _c[_b];
                     if (element.value == row[this.selectedInput]) {
                         existsInSuggestions = true;
@@ -140,12 +140,18 @@ var AppComponent = /** @class */ (function () {
                 //this regular expression will search given server record for input
                 tempArray = row[this.selectedInput].split(regex); //split string by regular expression and store the result into array
                 if (tempArray.length > 1) {
-                    this.splittedArray.push({ value: row[this.selectedInput], splitted: tempArray });
-                    //push value and splitted array into array
+                    if (tempArray[0] == '' && tempArray[2] == '') {
+                        this.splittedArray[inputName] = [{ value: row[this.selectedInput], splitted: [row[this.selectedInput]] }];
+                        this.validFilters[inputName] = true;
+                    }
+                    else {
+                        this.splittedArray[inputName].push({ value: row[this.selectedInput], splitted: tempArray });
+                        //push value and splitted array into array
+                    }
                 }
             }
         }
-        if (this.splittedArray.length > 0) {
+        if (this.splittedArray[inputName].length > 0) {
             this.displaySuggestions = true; //display suggestions
         }
     };
@@ -162,6 +168,16 @@ var AppComponent = /** @class */ (function () {
             this.validFilters.email = true; //email filter is valid
         }
         this.filter(); //call function filter
+    };
+    AppComponent.prototype.inputClicked = function (inputName) {
+        var _this = this;
+        this.selectedInput = inputName;
+        if (!(!this.input[this.selectedInput] || this.input[this.selectedInput].length < 3)) {
+            //if input's length is more than 2 characters
+            setTimeout(function () {
+                _this.displaySuggestions = true; //show suggestions
+            }, 10);
+        }
     };
     AppComponent.prototype.filter = function () {
         var tempData = this.savedData; //set server data to a variable
